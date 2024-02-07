@@ -39,6 +39,7 @@
   
 <script>
 import axios from "axios";
+import service from '@/services/api'
 export default {
     data() {
         return {
@@ -95,20 +96,9 @@ export default {
                 this.actualizarDatos(formData);
             }
         },
-        actualizarDatos(formData) {
-            let url = `http://127.0.0.1:7500/api/update_contact/${this.$route.params.id}`;
-
-            axios.post(url, formData)
-                .then(response => {
-                    console.log(response);
-                    if (response.status === 200) {
-                        alert(response.data.message || 'Contacto guardado exitosamente');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error al realizar la solicitud:', error);
-                    alert('Error al realizar la solicitud. Por favor, inténtalo de nuevo.');
-                });
+        async actualizarDatos(formData) {
+            const response = await service.updateContact(formData, this.$route.params.id)
+            console.log("🚀 ~ actualizarDatos ~ response:", response)
         }
 
 

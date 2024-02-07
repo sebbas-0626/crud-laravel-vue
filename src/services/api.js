@@ -1,12 +1,20 @@
 import axios from "axios";
 
+let urlApi = 'http://127.0.0.1:7500/api';
+
 const getContacts = async (page = null) => {
   try {
-    let url = "http://127.0.0.1:7500/api/contacts";
-    if (page) {
-      url = url + "?page=" + page;
-    }
-    const response = await axios.get(url);
+    const response = await axios.get(`${urlApi}/contacts${page ? '?page='+page : ''}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener contactos:", error);
+    throw error;
+  }
+};
+
+const updateContact = async (data, id) => {
+  try {
+    const response = await axios.post(`${urlApi}/update_contact/${id}`, data);
     return response.data;
   } catch (error) {
     console.error("Error al obtener contactos:", error);
@@ -17,4 +25,5 @@ const getContacts = async (page = null) => {
 
 export default {
   getContacts,
+  updateContact
 };
