@@ -12,7 +12,7 @@
                         <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="add_contact">Add Contacts</router-link>
+                        <router-link class="nav-link" to="add_contacts">Add Contacts</router-link>
                     </li>
                 </ul>
             </div>
