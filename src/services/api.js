@@ -1,10 +1,12 @@
 import axios from "axios";
 
-let urlApi = 'http://127.0.0.1:7500/api';
+let urlApi = "http://127.0.0.1:7500/api";
 
 const getContacts = async (page = null) => {
   try {
-    const response = await axios.get(`${urlApi}/contacts${page ? '?page='+page : ''}`);
+    const response = await axios.get(
+      `${urlApi}/contacts${page ? "?page=" + page : ""}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error al obtener contactos:", error);
@@ -22,8 +24,38 @@ const updateContact = async (data, id) => {
   }
 };
 
+//deleteContact
+const deleteContact = async (id) => {
+  try {
+    const response = await axios.delete(`${urlApi}/delete_contact/${id}`);
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (error) {
+    console.error("Error al eliminar contacto js", error);
+    throw error;
+  }
+};
+
+//getcontacts del componen editcontact
+
+async function getContactById(id) {
+  try {  
+    const url = `${urlApi}/get_contact/${id}`;
+    const response = await axios.get(url);
+    console.log(response);
+    // Desestructuración de la respuesta para obtener directamente los datos
+    const { data } = response;
+    return data;
+  } catch (error) {
+    console.error('Error al obtener el contacto:', error);
+    throw error; // Lanza el error para que pueda ser manejado en el componente
+  }
+}
 
 export default {
   getContacts,
-  updateContact
+  updateContact,
+  deleteContact,
+  getContactById,
 };

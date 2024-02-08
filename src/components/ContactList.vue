@@ -20,9 +20,10 @@
           <th scope="row">{{ contact.email }}</th>
           <th scope="row">{{ contact.designation }}</th>
           <th scope="row">{{ contact.contact_no }}</th>
-          
-          <th scope="row"><router-link :to ="{name: 'EditContact', params:{id: contact.id}}"
-            class="btn btn-primary btn-sm">Edit</router-link>
+
+          <th scope="row">
+            <router-link :to="{ name: 'EditContact', params: { id: contact.id } }"
+              class="btn btn-primary btn-sm">Edit</router-link>
           </th>
           <th scope="row">
             <button class="btn btn-danger btn-sm" @click.prevent="deleteContact(contact.id)">
@@ -40,7 +41,6 @@
 <script>
 import Pagination from "./Pagination.vue";
 import servicio from "@/services/api";
-import axios from "axios";
 
 export default {
   components: {
@@ -59,6 +59,7 @@ export default {
     };
   },
   methods: {
+    // obtener contacto api
     async getContacts(page = null) {
       const { contacts, message } = await servicio.getContacts(page);
       this.contacts = contacts.data;
@@ -68,17 +69,16 @@ export default {
     changePage(page) {
       this.getContacts(page);
     },
-
+    // Delete contact api
     async deleteContact(id) {
-      let url = `http://127.0.0.1:7500/api/delete_contact/${id}`;
       try {
-        const response = await axios.delete(url);
-        if (response.data.code === 200) {
-          alert(response.data.message);
-          this.getContacts(); // Actualiza la lista de contactos después de eliminar uno
-        }
+        const response = await servicio.deleteContact(id);
+        const message = response.message;
+        alert(message);
+        this.getContacts();
       } catch (error) {
-        console.error(error);
+        console.log(error);
+        alert("Hubo un error al eliminar el contacto");
       }
     },
   },
