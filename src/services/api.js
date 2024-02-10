@@ -53,9 +53,22 @@ async function getContactById(id) {
   }
 }
 
+//saveContact api 
+
+async function enviarDatos(formData) {
+  try {
+    const response = await axios.post(`${urlApi}/save_contact`, formData);
+    return response.data;
+  } catch (error) {
+    console.error('Error al realizar la solicitud:', error);
+    alert('Error al realizar la solicitud. Por favor, inténtalo de nuevo.');
+  }
+}
+
 export default {
   getContacts,
   updateContact,
   deleteContact,
   getContactById,
+  enviarDatos
 };

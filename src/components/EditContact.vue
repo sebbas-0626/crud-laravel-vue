@@ -93,7 +93,7 @@ export default {
     async actualizarDatos(formData) {
   try {
     const response = await service.updateContact(formData, this.$route.params.id);
-    alert(response.message); // Muestra el mensaje de la respuesta
+    alert(response.message);
     console.log(response)
   } catch (error) {
     console.error("Error al actualizar el contacto:", error);

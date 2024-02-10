@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import service from '@/services/api'
 export default {
   data() {
     return {
@@ -76,21 +76,18 @@ export default {
         this.enviarDatos(formData);
       }
     },
-    enviarDatos(formData) {
-      let url = 'http://127.0.0.1:7500/api/save_contact';
 
-      axios.post(url, formData)
-        .then(response => {
-          console.log(response);
-          if (response.status === 200) {
-            alert(response.data.message || 'Contacto guardado exitosamente');
-          }
-        })
-        .catch(error => {
-          console.error('Error al realizar la solicitud:', error);
-          alert('Error al realizar la solicitud. Por favor, inténtalo de nuevo.');
-        });
+    async enviarDatos(formData) {
+      try {
+        const data = await service.enviarDatos(formData);
+        alert(data.message);
+    console.log(data)
+      } catch (error) {
+        console.error('Error al enviar los datos:', error.message);
+        alert(error.message || 'Error al realizar la solicitud. Por favor, inténtalo de nuevo.');
+      }
     }
+
   }
 };
 </script>
