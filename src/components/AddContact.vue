@@ -80,10 +80,11 @@ export default {
     async enviarDatos(formData) {
       try {
         const data = await service.enviarDatos(formData);
+        const message = response.message;
         alert(data.message);
-    console.log(data)
+        console.log(data)
       } catch (error) {
-        console.error('Error al enviar los datos:', error.message);
+        console.error(error.message);
         alert(error.message || 'Error al realizar la solicitud. Por favor, inténtalo de nuevo.');
       }
     }
