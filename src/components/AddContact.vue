@@ -58,7 +58,7 @@ export default {
 
     requiredProperties.forEach(property => {
       if (!this.contact[property]){
-        this.errors.push(`${property.replace('_', ' ')} is required`)
+        this.errors.push(`${property.replace('_', ' ')} is required`) // reemplazar los guiones bajos con espacios en blanco
       }
     })
 
