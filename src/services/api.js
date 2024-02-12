@@ -28,7 +28,7 @@ const updateContact = async (data, id) => {
 const deleteContact = async (id) => {
   try {
     const response = await axios.delete(`${urlApi}/delete_contact/${id}`);
-    console.log(response)
+    console.log(response);
     if (response.status === 200) {
       return response.data;
     }
@@ -55,7 +55,7 @@ async function getContactById(id) {
 async function enviarDatos(formData) {
   try {
     const response = await axios.post(`${urlApi}/save_contact`, formData);
-    console.log(response)
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error("Error al realizar la solicitud:", error);

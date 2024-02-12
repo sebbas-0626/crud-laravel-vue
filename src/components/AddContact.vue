@@ -52,30 +52,44 @@ export default {
   methods: {
     saveContact() {
       this.errors = [];
-      if (!this.contact.name) {
-        this.errors.push("Name is required");
-      }
-      if (!this.contact.email) {
-        this.errors.push("Email is required");
-      }
-      if (!this.contact.designation) {
-        this.errors.push("Designation is required");
-      }
-      if (!this.contact.contact_no) {
-        this.errors.push("Contact number is required");
-      }
 
-      if (!this.errors.length) {
-        let formData = new FormData();
-        formData.append("name", this.contact.name);
-        formData.append("email", this.contact.email);
-        formData.append("designation", this.contact.designation);
-        formData.append("contact_no", this.contact.contact_no);
+       // Definimos las propiedades requeridas del contacto
+    const requiredProperties = ['name', 'email', 'designation', 'contact_no'];
 
-        // Llama a la función enviarDatos para realizar la solicitud
-        this.enviarDatos(formData);
+    requiredProperties.forEach(property => {
+      if (!this.contact[property]){
+        this.errors.push(`${property.replace('_', ' ')} is required`)
       }
+    })
+
     },
+    // saveContact() {
+    //   this.errors = [];
+    //   if (!this.contact.name) {
+    //     this.errors.push("Name is required");
+    //   }
+    //   if (!this.contact.email) {
+    //     this.errors.push("Email is required");
+    //   }
+    //   if (!this.contact.designation) {
+    //     this.errors.push("Designation is required");
+    //   }
+    //   if (!this.contact.contact_no) {
+    //     this.errors.push("Contact number is required");
+    //   }
+
+    //   if (!this.errors.length) {
+    //     let formData = new FormData();
+    //     formData.append("name", this.contact.name);
+    //     formData.append("email", this.contact.email);
+    //     formData.append("designation", this.contact.designation);
+    //     formData.append("contact_no", this.contact.contact_no);
+
+    //     // Llama a la función enviarDatos para realizar la solicitud
+    //     this.enviarDatos(formData);
+    //   }
+    // }
+
 
     async enviarDatos(formData) {
       try {
