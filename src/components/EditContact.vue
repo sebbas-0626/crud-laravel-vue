@@ -57,7 +57,6 @@ export default {
       try {
         const contactId = this.$route.params.id;
         const contact = await service.getContactById(contactId);
-        console.log(contact);
         this.contact = contact;
       } catch (error) {
         console.error("Error al obtener el contacto:", error);
@@ -118,7 +117,6 @@ export default {
       try {
         const response = await service.updateContact(formData, this.$route.params.id);
         alert(response.message);
-        console.log(response)
       } catch (error) {
         console.error("Error al actualizar el contacto:", error);
         alert("Hubo un error al actualizar el contacto");
